@@ -132,6 +132,17 @@ void Character::moveUP(int vertical_speed)
 			if (m_direction == 1 && !c1 && ((m_levelData[floor(fut_posx / (float)TILE_WIDTH)][ceil((fut_posy + m_dim.y) / (float)TILE_WIDTH)] != '.') ||
 				(m_levelData[floor((fut_posx + m_dim.x) / (float)TILE_WIDTH)][ceil((fut_posy + m_dim.y) / (float)TILE_WIDTH)] != '.')))		//wall above somewhere
 			{
+				if (((m_levelData[floor(fut_posx / (float)TILE_WIDTH)][ceil((fut_posy + m_dim.y) / (float)TILE_WIDTH)] == 'S') ||
+					(m_levelData[floor((fut_posx + m_dim.x) / (float)TILE_WIDTH)][ceil((fut_posy + m_dim.y) / (float)TILE_WIDTH)] == 'S')))
+				{
+					int distance = ((int)(fut_posy + m_dim.y)) % TILE_WIDTH;
+					if ((TILE_WIDTH - distance) < MIN_WALL_DISTANCE) {
+						m_position = glm::vec2(130.0f, 48.0f);
+						m_hasReachedGround = true;
+						return;
+					}
+
+				}
 				// std::cout << "Going to change y " << std::endl;
 				int distance = ((int)(fut_posy + m_dim.y)) % TILE_WIDTH;
 				if ((TILE_WIDTH - distance) < MIN_WALL_DISTANCE) {
@@ -144,6 +155,8 @@ void Character::moveUP(int vertical_speed)
 					//m_time_rem = 0;
 					//return; //without updating the position, as the player cannot move any closer than the min distance 
 				}
+
+
 			}
 
 			
@@ -161,6 +174,19 @@ void Character::moveUP(int vertical_speed)
 			if (!c1 && ((m_levelData[floor(fut_posx / (float)TILE_WIDTH)][floor((fut_posy) / (float)TILE_WIDTH) - 1] != '.') ||
 				(m_levelData[floor((fut_posx + m_dim.x) / (float)TILE_WIDTH)][floor((fut_posy) / (float)TILE_WIDTH) - 1] != '.'))) //wall below somewhere
 			{
+				// to respawn when collision occured with spike in right direction
+				if (((m_levelData[floor(fut_posx / (float)TILE_WIDTH)][floor((fut_posy) / (float)TILE_WIDTH) - 1] == 'S') ||
+					(m_levelData[floor((fut_posx + m_dim.x) / (float)TILE_WIDTH)][floor((fut_posy) / (float)TILE_WIDTH) - 1] == 'S')))
+				{
+					int distance = ((int)(fut_posy)) % TILE_WIDTH;
+					if (distance < MIN_WALL_DISTANCE) {
+						m_hasReachedGround = true;
+						m_position = glm::vec2(130.0f, 48.0f);
+						return;
+					}
+
+				}
+
 				// std::cout << "Going to change yyy " << std::endl;
 				int distance = ((int)(fut_posy)) % TILE_WIDTH;
 				if (distance < MIN_WALL_DISTANCE) {
@@ -173,11 +199,26 @@ void Character::moveUP(int vertical_speed)
 					//return; //without updating the position, as the player cannot move any closer than the min distance 
 
 				}
+
+
 			}
 
 			if (!c2 && ((m_levelData[floor(fut_posx / (float)TILE_WIDTH) - 1][floor((fut_posy + m_dim.y) / (float)TILE_WIDTH)] != '.') ||
 				(m_levelData[floor((fut_posx) / (float)TILE_WIDTH) - 1][floor((fut_posy) / (float)TILE_WIDTH)] != '.')))	//wall on the left somehwere
 			{
+				// to respawn when collision occured with spike in right direction
+				if (((m_levelData[floor(fut_posx / (float)TILE_WIDTH) - 1][floor((fut_posy + m_dim.y) / (float)TILE_WIDTH)] == 'S') ||
+					(m_levelData[floor((fut_posx) / (float)TILE_WIDTH) - 1][floor((fut_posy) / (float)TILE_WIDTH)] == 'S')))
+				{
+					int distance = ((int)(fut_posx)) % TILE_WIDTH;
+					if (distance < MIN_WALL_DISTANCE) {
+						m_hasReachedGround = true;
+						m_position = glm::vec2(130.0f, 48.0f);
+						return;
+					}
+
+				}
+
 				int distance = ((int)(fut_posx)) % TILE_WIDTH;
 				if (distance < MIN_WALL_DISTANCE) {
 					c2 = true;
@@ -187,11 +228,26 @@ void Character::moveUP(int vertical_speed)
 					//return; //without updating the position, as the player cannot move any closer than the min distance 
 
 				}
+
+
 			}
 
 			if (!c2 && ((m_levelData[ceil((fut_posx + m_dim.x) / (float)TILE_WIDTH)][floor((fut_posy + m_dim.y) / (float)TILE_WIDTH)] != '.') ||
 				(m_levelData[ceil((fut_posx + m_dim.x) / (float)TILE_WIDTH)][floor((fut_posy) / (float)TILE_WIDTH)] != '.')))	//wall on the right
 			{
+				// to respawn when collision occured with spike in right direction
+				if (((m_levelData[ceil((fut_posx + m_dim.x) / (float)TILE_WIDTH)][floor((fut_posy + m_dim.y) / (float)TILE_WIDTH)] == 'S') ||
+					(m_levelData[ceil((fut_posx + m_dim.x) / (float)TILE_WIDTH)][floor((fut_posy) / (float)TILE_WIDTH)] == 'S')))
+				{
+					int distance = ((int)(fut_posx + m_dim.x)) % TILE_WIDTH;
+					if ((TILE_WIDTH - distance) < MIN_WALL_DISTANCE) {
+						m_hasReachedGround = true;
+						m_position = glm::vec2(130.0f, 48.0f);
+						return;
+					}
+
+				}
+
 				int distance = ((int)(fut_posx + m_dim.x)) % TILE_WIDTH;
 				if ((TILE_WIDTH - distance) < MIN_WALL_DISTANCE)
 				{
@@ -200,6 +256,7 @@ void Character::moveUP(int vertical_speed)
 					//m_time_rem = 0;
 					//return;	//without updating the position, as the player cannot move any closer than the min distance 
 				}
+
 			}
 
 			if (c1 == true) {
@@ -214,7 +271,7 @@ void Character::moveUP(int vertical_speed)
 				// std::cout << " c2 taking y pos = " << fut_posy << std::endl;
 			}
 
-			std::cout << "Going to increment xpos = "<< floor(fut_posx / (float)TILE_WIDTH) << ", ypos = " << floor(fut_posy / (float)TILE_WIDTH) - 1 << std::endl;
+			std::cout << "Going to increment xpos = "<< m_position.x << ", ypos = " << m_position.y << std::endl;
 			m_position = glm::vec2(fut_posx, fut_posy);
 			//m_position = glm::vec2(air_pos_x + x_pos, air_pos_y + y_pos);
 		}
@@ -237,6 +294,17 @@ void Character::moveDOWN()
 
 void Character::moveLEFT()
 {	
+	if ((m_levelData[floor(m_position.x / (float)TILE_WIDTH) - 1][floor((m_position.y + m_dim.y) / (float)TILE_WIDTH)] == 'S') ||
+		(m_levelData[floor((m_position.x) / (float)TILE_WIDTH) - 1][floor((m_position.y) / (float)TILE_WIDTH)] == 'S'))	//wall on the left somehwere
+	{
+		int distance = ((int)(m_position.x)) % TILE_WIDTH;
+		if (distance < MIN_WALL_DISTANCE)
+		{
+			m_position = glm::vec2(130.0f, 48.0f);
+			return;
+		}
+	}
+
 	if ((m_levelData[floor(m_position.x / (float)TILE_WIDTH) - 1][floor((m_position.y + m_dim.y) / (float)TILE_WIDTH)] != '.') ||
 		(m_levelData[floor((m_position.x) / (float)TILE_WIDTH) - 1][floor((m_position.y) / (float)TILE_WIDTH)] != '.'))	//wall on the left somehwere
 	{
@@ -265,6 +333,15 @@ void Character::moveLEFT()
 
 void Character::moveRIGHT()
 {
+	if ((m_levelData[ceil((m_position.x + m_dim.x) / (float)TILE_WIDTH)][floor((m_position.y + m_dim.y) / (float)TILE_WIDTH)] == 'S') ||
+		(m_levelData[ceil((m_position.x + m_dim.x) / (float)TILE_WIDTH)][floor((m_position.y) / (float)TILE_WIDTH)] == 'S')) {
+		int distance = ((int)(m_position.x + m_dim.x)) % TILE_WIDTH;
+		if ((TILE_WIDTH - distance) < MIN_WALL_DISTANCE) {
+			m_position = glm::vec2(130.0f, 48.0f);
+			return;
+		}
+	}
+
 	if ((m_levelData[ceil((m_position.x + m_dim.x) / (float)TILE_WIDTH)][floor((m_position.y + m_dim.y) / (float)TILE_WIDTH)] != '.') ||
 		(m_levelData[ceil((m_position.x + m_dim.x) / (float)TILE_WIDTH)][floor((m_position.y) / (float)TILE_WIDTH)] != '.'))	//wall on the right
 	{

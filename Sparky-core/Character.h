@@ -7,6 +7,7 @@
 #include <vector>
 #include "Bullet.h"
 #include "Level.h"
+#include "Sockets.h"
 
 const int MIN_WALL_DISTANCE = 3;
 using namespace ArrowsIoEngine;

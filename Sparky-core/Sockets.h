@@ -62,6 +62,10 @@ public:
 	void sendData(std::string& s);
 	void receiveData(std::string & s);
 	bool init;
+	glm::vec2 getSpawnPosition(int x)
+	{
+		return respawnPosition[x];
+	}
 private:
 	SOCKET master;
 	SOCKET * clients;
@@ -73,7 +77,7 @@ private:
 	std::vector<bool> flag;
 
 	std::string spawnPositions;
-	glm::vec2 respawnPosition[4] = { glm::vec2(130.0f,175.0f),glm::vec2(250.0f,200.0f), glm::vec2(130.0f,500.0f), glm::vec2(200.0f,600.0f) };
+	glm::vec2 respawnPosition[4] = { glm::vec2(130.0f,48.0f),glm::vec2(130.0f,48.0f), glm::vec2(130.0f,500.0f), glm::vec2(200.0f,600.0f) };
 	std::string serverData;
 	std::string playerData;
 	std::mutex mtx;

@@ -12,6 +12,7 @@ Level::Level(const std::string& fileName, int screenWidth, int screenHeight)
 	brick2Id = ResourceManager::getTexture("../Sparky-core/Textures/brick2.png").id;
 	grassId = ResourceManager::getTexture("../Sparky-core/Textures/grass.png").id;
 	floorId = ResourceManager::getTexture("../Sparky-core/Textures/floor.png").id;
+	spikeId = ResourceManager::getTexture("../Sparky-core/Textures/spike.png").id;
 
 	//opening the level file
 	std::ifstream file;
@@ -50,6 +51,9 @@ Level::Level(const std::string& fileName, int screenWidth, int screenHeight)
 				break;
 			case 'G':
 				m_spriteBatch.draw(destRect, uvRect, grassId, 0.0f, color);
+				break;
+			case 'S':
+				m_spriteBatch.draw(destRect, uvRect, spikeId, 0.0f, color);
 				break;
 			case '.':
 				m_spriteBatch.draw(destRect, uvRect, floorId, 0.0f, color);
