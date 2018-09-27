@@ -8,7 +8,7 @@
 #include "Bullet.h"
 #include "Level.h"
 
-const int MIN_WALL_DISTANCE = 2;
+const int MIN_WALL_DISTANCE = 3;
 using namespace ArrowsIoEngine;
 class Character
 {
@@ -33,6 +33,7 @@ public:
 	int m_is_called_by = 1;
 	bool m_hasReachedGround = false;
 	bool m_first_time = true;
+	int m_direction = -1;	// 0 means steady, -1 means down and 1 means up
 
 	bool damageTaken(int damage, int livePlayer, int callerPlayer, int playerType);
 	void setGunType(int i) { gunID = i; }

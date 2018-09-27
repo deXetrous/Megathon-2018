@@ -514,6 +514,7 @@ void MainGameServer::processInput()
 
 		if (_inputManager.isKeyDown(SDLK_w)) {
 			m_mainPlayer->m_is_called_by = 0;
+			m_mainPlayer->m_direction = 1;
 			m_mainPlayer->moveUP(2);
 		}
 

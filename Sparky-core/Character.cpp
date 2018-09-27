@@ -108,6 +108,8 @@ void Character::moveUP(int vertical_speed)
 			y_pos = m_vertical_speed * (m_time_rem) + (m_gravity * (m_time_rem) * (m_time_rem)) / 100;
 			m_time_rem++;
 
+			
+
 			float fut_x = air_pos_x + x_pos ;
 			float fut_y = air_pos_y + y_pos ;
 			
@@ -125,14 +127,20 @@ void Character::moveUP(int vertical_speed)
 
 			// std::cout << "remain time " << m_time_rem << std::endl;
 
-			if (!c1 && ((m_levelData[floor(fut_posx / (float)TILE_WIDTH)][ceil((fut_posy + m_dim.y) / (float)TILE_WIDTH)] != '.') ||
+			
+
+			if (m_direction == 1 && !c1 && ((m_levelData[floor(fut_posx / (float)TILE_WIDTH)][ceil((fut_posy + m_dim.y) / (float)TILE_WIDTH)] != '.') ||
 				(m_levelData[floor((fut_posx + m_dim.x) / (float)TILE_WIDTH)][ceil((fut_posy + m_dim.y) / (float)TILE_WIDTH)] != '.')))		//wall above somewhere
 			{
 				// std::cout << "Going to change y " << std::endl;
 				int distance = ((int)(fut_posy + m_dim.y)) % TILE_WIDTH;
 				if ((TILE_WIDTH - distance) < MIN_WALL_DISTANCE) {
 					fut_posy = m_position.y;
+					m_is_called_by = 1;
+					m_first_time = true;
 					c1 = true;
+					m_direction = -1;
+					std::cout << "Collision with upper wall detected.\n";
 					//m_time_rem = 0;
 					//return; //without updating the position, as the player cannot move any closer than the min distance 
 				}
@@ -142,9 +150,14 @@ void Character::moveUP(int vertical_speed)
 			if (floor(fut_posx / (float)TILE_WIDTH) < 0 || floor((fut_posx + m_dim.x) / (float)TILE_WIDTH) < 0 || floor((fut_posy) / (float)TILE_WIDTH) - 1 < 0 || floor((fut_posy) / (float)TILE_WIDTH) - 1 < 0)
 			{
 				m_hasReachedGround = true;
+				m_direction = 0;
 				return;
 			}
 
+			/*for (int i = floor((m_position.y) / (float)TILE_WIDTH) - 1; i < floor((fut_posy) / (float)TILE_WIDTH) - 1; i++)
+			{
+
+			}*/
 			if (!c1 && ((m_levelData[floor(fut_posx / (float)TILE_WIDTH)][floor((fut_posy) / (float)TILE_WIDTH) - 1] != '.') ||
 				(m_levelData[floor((fut_posx + m_dim.x) / (float)TILE_WIDTH)][floor((fut_posy) / (float)TILE_WIDTH) - 1] != '.'))) //wall below somewhere
 			{
@@ -152,8 +165,10 @@ void Character::moveUP(int vertical_speed)
 				int distance = ((int)(fut_posy)) % TILE_WIDTH;
 				if (distance < MIN_WALL_DISTANCE) {
 					m_hasReachedGround = true;
+					std::cout << "Collision with lower wall detected.\n";
 					c1 = true;
 					fut_posy = m_position.y;
+					m_direction = 0;
 					//m_time_rem = 0;
 					//return; //without updating the position, as the player cannot move any closer than the min distance 
 
@@ -166,6 +181,7 @@ void Character::moveUP(int vertical_speed)
 				int distance = ((int)(fut_posx)) % TILE_WIDTH;
 				if (distance < MIN_WALL_DISTANCE) {
 					c2 = true;
+					std::cout << "Collision with right wall detected.\n";
 					fut_posx = m_position.x;
 					//m_time_rem = 0;
 					//return; //without updating the position, as the player cannot move any closer than the min distance 
@@ -229,7 +245,8 @@ void Character::moveLEFT()
 			return; //without updating the position, as the player cannot move any closer than the min distance 
 	}
 	h_speed = -m_speed;
-	if ((m_levelData[floor(m_position.x / (float)TILE_WIDTH)][floor((m_position.y) / (float)TILE_WIDTH) - 1] != '.')) //wall below somewhere
+	if (((m_levelData[floor(m_position.x / (float)TILE_WIDTH)][floor((m_position.y) / (float)TILE_WIDTH) - 1] != '.') ||
+		(m_levelData[floor((m_position.x + m_dim.x) / (float)TILE_WIDTH)][floor((m_position.y) / (float)TILE_WIDTH) - 1] != '.'))) //wall below somewhere
 	{
 		// std::cout << "x index = " << floor(m_position.x / (float)TILE_WIDTH) << ", y index = " << floor(m_position.y / (float)TILE_WIDTH) - 1 << std::endl;
 		is_d_pressed = true;
@@ -257,7 +274,8 @@ void Character::moveRIGHT()
 	}
 	h_speed = m_speed;
 
-	if ((m_levelData[floor(m_position.x / (float)TILE_WIDTH)][floor((m_position.y) / (float)TILE_WIDTH) - 1] != '.')) //wall below somewhere
+	if (((m_levelData[floor(m_position.x / (float)TILE_WIDTH)][floor((m_position.y) / (float)TILE_WIDTH) - 1] != '.') ||
+				(m_levelData[floor((m_position.x + m_dim.x) / (float)TILE_WIDTH)][floor((m_position.y) / (float)TILE_WIDTH) - 1] != '.'))) //wall below somewhere
 	{
 		// std::cout << "x index = " << floor(m_position.x / (float)TILE_WIDTH) << ", y index = " << floor(m_position.y / (float)TILE_WIDTH) - 1 << std::endl;
 		is_d_pressed = true;
@@ -265,6 +283,7 @@ void Character::moveRIGHT()
 	}
 	else {
 		// std::cout << "going...else\n";
+		std::cout << "No wall below detected.\n";
 		m_hasReachedGround = false;
 		m_is_called_by = 1;
 		m_first_time = true;
