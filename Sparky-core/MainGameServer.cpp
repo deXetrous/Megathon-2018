@@ -15,7 +15,7 @@ MainGameServer::MainGameServer(int noOfPlayers, int currentIndex, const std::vec
 	socket(server)
 {
 	_camera.init(_screenWidth, _screenHeight);
-	m_playerDim = glm::vec2(30.0f, 45.0f);
+	m_playerDim = glm::vec2(30.0f, 30.0f);
 	m_bulletDim = glm::vec2(15.0f, 15.0f);
 	m_noOfPlayers = noOfPlayers;
 	m_currentIndex = currentIndex;
@@ -418,9 +418,13 @@ void MainGameServer::processInput()
 	const float CAMERA_SPEED = 2.0f;
 	const float SCALE_SPEED = 0.1f;
 
-	if (m_mainPlayer->m_time_rem > 0) {
-		// std::cout << m_mainPlayer->m_time_rem << std::endl;
-		m_mainPlayer->moveUP();
+	if (!m_mainPlayer->m_hasReachedGround) {
+		if (m_mainPlayer->m_is_called_by == 0) {
+			m_mainPlayer->moveUP(2);
+		}
+		else {
+			m_mainPlayer->moveUP(0);
+		}
 		return;
 	}
 
@@ -508,8 +512,10 @@ void MainGameServer::processInput()
 
 		}
 
-		if (_inputManager.isKeyDown(SDLK_w))
-			m_mainPlayer->moveUP();
+		if (_inputManager.isKeyDown(SDLK_w)) {
+			m_mainPlayer->m_is_called_by = 0;
+			m_mainPlayer->moveUP(2);
+		}
 
 		if (_inputManager.isKeyDown(SDLK_s))
 			m_mainPlayer->moveDOWN();
@@ -527,6 +533,7 @@ void MainGameServer::processInput()
 
 		if (_inputManager.isKeyDown(SDLK_q))
 			_camera.setScale(_camera.getScale() + SCALE_SPEED);
+
 		if (_inputManager.isKeyDown(SDLK_e))
 			_camera.setScale(_camera.getScale() - SCALE_SPEED);
 

@@ -16,16 +16,23 @@ public:
 	Character(std::string name, glm::vec2 pos, int person, glm::vec2 dim, int speed, const std::vector<std::string>& levelData);
 	~Character();
 	void draw(SpriteBatch& spriteBatch);
-	void moveUP();
+	void moveUP(int vertical_speed);
 	void moveDOWN();
 	void moveRIGHT();
 	void moveLEFT();
 	// make private
 	int m_time_rem = 0;
-	float air_pos_x, air_pos_y;
+	float air_pos_x = getPosition().x, air_pos_y = getPosition().y;
 	bool is_d_pressed = false;
 	bool is_a_pressed = false;
 	int h_speed = 0;
+	bool c1 = false;
+	bool c2 = false;
+	bool c3 = false;
+	bool c4 = false;
+	int m_is_called_by = 1;
+	bool m_hasReachedGround = false;
+	bool m_first_time = true;
 
 	bool damageTaken(int damage, int livePlayer, int callerPlayer, int playerType);
 	void setGunType(int i) { gunID = i; }
