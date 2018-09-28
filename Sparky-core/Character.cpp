@@ -2,7 +2,7 @@
 #include <iostream>
 
 //initializing the defalut constructor values
-Character::Character(std::string name, glm::vec2 pos, int person, glm::vec2 dim, int speed, const std::vector<std::string>& levelData)
+Character::Character(std::string name, glm::vec2 pos, int person, glm::vec2 dim, float speed, const std::vector<std::string>& levelData)
 {
 	m_health = 7;
 	m_name = name;
@@ -70,7 +70,7 @@ void Character::draw(SpriteBatch& spriteBatch)
 
 //function to move the characters
 
-void Character::moveUP(int vertical_speed)
+void Character::moveUP(float vertical_speed)
 {
 	/*if ((m_levelData[floor(m_position.x / (float)TILE_WIDTH)][ceil((m_position.y + m_dim.y) / (float)TILE_WIDTH)] != '.') ||
 		(m_levelData[floor((m_position.x + m_dim.x) / (float)TILE_WIDTH)][ceil((m_position.y + m_dim.y) / (float)TILE_WIDTH)] != '.'))		//wall above somewhere

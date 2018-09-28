@@ -74,7 +74,7 @@ void MainGameServer::initSystems()
 
 	for (int i = 0; i < m_noOfPlayers; i++)		// creating players
 	{
-		m_chars.emplace_back(m_players[i].name, m_players[i].position, m_players[i].playerIndex, m_playerDim, 1, m_leveldata);
+		m_chars.emplace_back(m_players[i].name, m_players[i].position, m_players[i].playerIndex, m_playerDim, 1.23, m_leveldata);
 	}
 
 
@@ -420,7 +420,7 @@ void MainGameServer::processInput()
 
 	if (!m_mainPlayer->m_hasReachedGround) {
 		if (m_mainPlayer->m_is_called_by == 0) {
-			m_mainPlayer->moveUP(2);
+			m_mainPlayer->moveUP(3);
 		}
 		else {
 			m_mainPlayer->moveUP(0);
@@ -515,7 +515,7 @@ void MainGameServer::processInput()
 		if (_inputManager.isKeyDown(SDLK_w)) {
 			m_mainPlayer->m_is_called_by = 0;
 			m_mainPlayer->m_direction = 1;
-			m_mainPlayer->moveUP(2);
+			m_mainPlayer->moveUP(3);
 		}
 
 		if (_inputManager.isKeyDown(SDLK_s))

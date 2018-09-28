@@ -23,5 +23,5 @@ private:
 	GLuint grassId;
 	GLuint floorId;
 	GLuint spikeId;
-
+	GLuint spikeSmallId;
 };
