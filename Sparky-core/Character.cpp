@@ -333,14 +333,24 @@ void Character::moveLEFT()
 
 void Character::moveRIGHT()
 {
-	if ((m_levelData[ceil((m_position.x + m_dim.x) / (float)TILE_WIDTH)][floor((m_position.y + m_dim.y) / (float)TILE_WIDTH)] == 'S') ||
+	/*if ((m_levelData[ceil((m_position.x + m_dim.x) / (float)TILE_WIDTH)][floor((m_position.y + m_dim.y) / (float)TILE_WIDTH)] == 'S') ||
 		(m_levelData[ceil((m_position.x + m_dim.x) / (float)TILE_WIDTH)][floor((m_position.y) / (float)TILE_WIDTH)] == 'S')) {
 		int distance = ((int)(m_position.x + m_dim.x)) % TILE_WIDTH;
 		if ((TILE_WIDTH - distance) < MIN_WALL_DISTANCE) {
 			m_position = glm::vec2(130.0f, 48.0f);
 			return;
 		}
+	}*/
+
+	if ((m_levelData[ceil((m_position.x + m_dim.x) / (float)TILE_WIDTH)][floor((m_position.y + m_dim.y) / (float)TILE_WIDTH)] == 'S') ||
+		(m_levelData[ceil((m_position.x + m_dim.x) / (float)TILE_WIDTH)][floor((m_position.y) / (float)TILE_WIDTH)] == 'S')) {
+		int distance = ((int)(m_position.x + m_dim.x)) % TILE_WIDTH;
+		if ((TILE_WIDTH - distance) < MIN_WALL_DISTANCE) {
+			life = false;
+			std::cout << "Setting false" << std::endl;
+		}
 	}
+
 
 	if ((m_levelData[ceil((m_position.x + m_dim.x) / (float)TILE_WIDTH)][floor((m_position.y + m_dim.y) / (float)TILE_WIDTH)] != '.') ||
 		(m_levelData[ceil((m_position.x + m_dim.x) / (float)TILE_WIDTH)][floor((m_position.y) / (float)TILE_WIDTH)] != '.'))	//wall on the right
