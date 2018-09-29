@@ -77,6 +77,6 @@ private:
 	int m_currentGunIndex;
 	bool life = true;
 
-	std::string m_filePaths[4] = { "../Sparky-core/Textures/Characters/char1.png","../Sparky-core/Textures/Characters/char2.png","../Sparky-core/Textures/Characters/char3.png","../Sparky-core/Textures/Characters/char4.png" };
+	std::string m_filePaths[4] = { "../Sparky-core/Textures/assets/char-1.png","../Sparky-core/Textures/assets/char-2.png","../Sparky-core/Textures/assets/char-1.png","../Sparky-core/Textures/assets/char-2.png" };
 };
 

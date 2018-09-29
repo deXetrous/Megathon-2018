@@ -107,7 +107,11 @@ void MainGameServer::gameLoop()
 		if (m_mainPlayer->getLife())
 			processInput();				//processing the input given by the player
 		else
+		{
+			MessageBox(nullptr, TEXT("YOU FINISHED THE GAME"), TEXT("Message"), MB_OK);
 			SDL_Quit();
+			_gameState = GameStateServer::EXIT;
+		}
 
 		_time += 0.01;
 
@@ -405,10 +409,16 @@ void MainGameServer::updateNoPlayer()
 //function for updating false death to true
 void MainGameServer::updateLive()
 {
+	int count = 0;
 	for (int i = 0; i < m_chars.size(); i++)
 	{
-		if (m_chars[i].getHealth() > 0)
-			m_chars[i].setLife(true);
+		if (m_chars[i].getLife())
+			count++;
+	}
+
+	if (!m_mainPlayer->getLife())
+	{
+		std::cout << "U came " << m_chars.size() - count << std::endl;
 	}
 }
 
@@ -537,14 +547,11 @@ void MainGameServer::processInput()
 
 		}
 
-		if (_inputManager.isKeyDown(SDLK_w)) {
+		if (_inputManager.isKeyDown(SDLK_SPACE)) {
 			m_mainPlayer->m_is_called_by = 0;
 			m_mainPlayer->m_direction = 1;
 			m_mainPlayer->moveUP(2);
 		}
-
-		if (_inputManager.isKeyDown(SDLK_s))
-			m_mainPlayer->moveDOWN();
 
 		if (_inputManager.isKeyDown(SDLK_a))
 			m_mainPlayer->moveLEFT();

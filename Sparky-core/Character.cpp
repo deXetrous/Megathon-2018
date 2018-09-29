@@ -172,6 +172,50 @@ void Character::moveUP(int vertical_speed)
 					}
 
 				}
+				if (((m_levelData[floor(fut_posx / (float)TILE_WIDTH)][ceil((fut_posy + m_dim.y) / (float)TILE_WIDTH)] == 's') ||
+					(m_levelData[floor((fut_posx + m_dim.x) / (float)TILE_WIDTH)][ceil((fut_posy + m_dim.y) / (float)TILE_WIDTH)] == 's')))
+				{
+					int distance = ((int)(fut_posy + m_dim.y)) % TILE_WIDTH;
+					if ((TILE_WIDTH - distance) < MIN_WALL_DISTANCE) {
+						m_position = glm::vec2(130.0f, 48.0f);
+						m_hasReachedGround = true;
+						return;
+					}
+
+				}
+				if (((m_levelData[floor(fut_posx / (float)TILE_WIDTH)][ceil((fut_posy + m_dim.y) / (float)TILE_WIDTH)] == 'l') ||
+					(m_levelData[floor((fut_posx + m_dim.x) / (float)TILE_WIDTH)][ceil((fut_posy + m_dim.y) / (float)TILE_WIDTH)] == 'l')))
+				{
+					int distance = ((int)(fut_posy + m_dim.y)) % TILE_WIDTH;
+					if ((TILE_WIDTH - distance) < MIN_WALL_DISTANCE) {
+						m_position = glm::vec2(130.0f, 48.0f);
+						m_hasReachedGround = true;
+						return;
+					}
+
+				}
+				if (((m_levelData[floor(fut_posx / (float)TILE_WIDTH)][ceil((fut_posy + m_dim.y) / (float)TILE_WIDTH)] == '+') ||
+					(m_levelData[floor((fut_posx + m_dim.x) / (float)TILE_WIDTH)][ceil((fut_posy + m_dim.y) / (float)TILE_WIDTH)] == '+')))
+				{
+					int distance = ((int)(fut_posy + m_dim.y)) % TILE_WIDTH;
+					if ((TILE_WIDTH - distance) < MIN_WALL_DISTANCE) {
+						m_position = glm::vec2(130.0f, 48.0f);
+						m_hasReachedGround = true;
+						return;
+					}
+
+				}
+				if (((m_levelData[floor(fut_posx / (float)TILE_WIDTH)][ceil((fut_posy + m_dim.y) / (float)TILE_WIDTH)] == '-') ||
+					(m_levelData[floor((fut_posx + m_dim.x) / (float)TILE_WIDTH)][ceil((fut_posy + m_dim.y) / (float)TILE_WIDTH)] == '-')))
+				{
+					int distance = ((int)(fut_posy + m_dim.y)) % TILE_WIDTH;
+					if ((TILE_WIDTH - distance) < MIN_WALL_DISTANCE) {
+						m_position = glm::vec2(130.0f, 48.0f);
+						m_hasReachedGround = true;
+						return;
+					}
+
+				}
 				// std::cout << "Going to change y " << std::endl;
 				int distance = ((int)(fut_posy + m_dim.y)) % TILE_WIDTH;
 				if ((TILE_WIDTH - distance) < MIN_WALL_DISTANCE) {
@@ -206,6 +250,50 @@ void Character::moveUP(int vertical_speed)
 				// to respawn when collision occured with spike in right direction
 				if (((m_levelData[floor(fut_posx / (float)TILE_WIDTH)][floor((fut_posy) / (float)TILE_WIDTH) - 1] == 'S') ||
 					(m_levelData[floor((fut_posx + m_dim.x) / (float)TILE_WIDTH)][floor((fut_posy) / (float)TILE_WIDTH) - 1] == 'S')))
+				{
+					int distance = ((int)(fut_posy)) % TILE_WIDTH;
+					if (distance < MIN_WALL_DISTANCE) {
+						m_hasReachedGround = true;
+						m_position = glm::vec2(130.0f, 48.0f);
+						return;
+					}
+
+				}
+				if (((m_levelData[floor(fut_posx / (float)TILE_WIDTH)][floor((fut_posy) / (float)TILE_WIDTH) - 1] == 's') ||
+					(m_levelData[floor((fut_posx + m_dim.x) / (float)TILE_WIDTH)][floor((fut_posy) / (float)TILE_WIDTH) - 1] == 's')))
+				{
+					int distance = ((int)(fut_posy)) % TILE_WIDTH;
+					if (distance < MIN_WALL_DISTANCE) {
+						m_hasReachedGround = true;
+						m_position = glm::vec2(130.0f, 48.0f);
+						return;
+					}
+
+				}
+				if (((m_levelData[floor(fut_posx / (float)TILE_WIDTH)][floor((fut_posy) / (float)TILE_WIDTH) - 1] == 'l') ||
+					(m_levelData[floor((fut_posx + m_dim.x) / (float)TILE_WIDTH)][floor((fut_posy) / (float)TILE_WIDTH) - 1] == 'l')))
+				{
+					int distance = ((int)(fut_posy)) % TILE_WIDTH;
+					if (distance < MIN_WALL_DISTANCE) {
+						m_hasReachedGround = true;
+						m_position = glm::vec2(130.0f, 48.0f);
+						return;
+					}
+
+				}
+				if (((m_levelData[floor(fut_posx / (float)TILE_WIDTH)][floor((fut_posy) / (float)TILE_WIDTH) - 1] == '+') ||
+					(m_levelData[floor((fut_posx + m_dim.x) / (float)TILE_WIDTH)][floor((fut_posy) / (float)TILE_WIDTH) - 1] == '+')))
+				{
+					int distance = ((int)(fut_posy)) % TILE_WIDTH;
+					if (distance < MIN_WALL_DISTANCE) {
+						m_hasReachedGround = true;
+						m_position = glm::vec2(130.0f, 48.0f);
+						return;
+					}
+
+				}
+				if (((m_levelData[floor(fut_posx / (float)TILE_WIDTH)][floor((fut_posy) / (float)TILE_WIDTH) - 1] == '-') ||
+					(m_levelData[floor((fut_posx + m_dim.x) / (float)TILE_WIDTH)][floor((fut_posy) / (float)TILE_WIDTH) - 1] == '-')))
 				{
 					int distance = ((int)(fut_posy)) % TILE_WIDTH;
 					if (distance < MIN_WALL_DISTANCE) {
@@ -259,6 +347,50 @@ void Character::moveUP(int vertical_speed)
 					}
 
 				}
+				if (((m_levelData[floor(fut_posx / (float)TILE_WIDTH) - 1][floor((fut_posy + m_dim.y) / (float)TILE_WIDTH)] == 's') ||
+					(m_levelData[floor((fut_posx) / (float)TILE_WIDTH) - 1][floor((fut_posy) / (float)TILE_WIDTH)] == 's')))
+				{
+					int distance = ((int)(fut_posx)) % TILE_WIDTH;
+					if (distance < MIN_WALL_DISTANCE) {
+						m_hasReachedGround = true;
+						m_position = glm::vec2(130.0f, 48.0f);
+						return;
+					}
+
+				}
+				if (((m_levelData[floor(fut_posx / (float)TILE_WIDTH) - 1][floor((fut_posy + m_dim.y) / (float)TILE_WIDTH)] == 'l') ||
+					(m_levelData[floor((fut_posx) / (float)TILE_WIDTH) - 1][floor((fut_posy) / (float)TILE_WIDTH)] == 'l')))
+				{
+					int distance = ((int)(fut_posx)) % TILE_WIDTH;
+					if (distance < MIN_WALL_DISTANCE) {
+						m_hasReachedGround = true;
+						m_position = glm::vec2(130.0f, 48.0f);
+						return;
+					}
+
+				}
+				if (((m_levelData[floor(fut_posx / (float)TILE_WIDTH) - 1][floor((fut_posy + m_dim.y) / (float)TILE_WIDTH)] == '+') ||
+					(m_levelData[floor((fut_posx) / (float)TILE_WIDTH) - 1][floor((fut_posy) / (float)TILE_WIDTH)] == '+')))
+				{
+					int distance = ((int)(fut_posx)) % TILE_WIDTH;
+					if (distance < MIN_WALL_DISTANCE) {
+						m_hasReachedGround = true;
+						m_position = glm::vec2(130.0f, 48.0f);
+						return;
+					}
+
+				}
+				if (((m_levelData[floor(fut_posx / (float)TILE_WIDTH) - 1][floor((fut_posy + m_dim.y) / (float)TILE_WIDTH)] == '-') ||
+					(m_levelData[floor((fut_posx) / (float)TILE_WIDTH) - 1][floor((fut_posy) / (float)TILE_WIDTH)] == '-')))
+				{
+					int distance = ((int)(fut_posx)) % TILE_WIDTH;
+					if (distance < MIN_WALL_DISTANCE) {
+						m_hasReachedGround = true;
+						m_position = glm::vec2(130.0f, 48.0f);
+						return;
+					}
+
+				}
 
 				int distance = ((int)(fut_posx)) % TILE_WIDTH;
 				if (distance < MIN_WALL_DISTANCE) {
@@ -279,6 +411,58 @@ void Character::moveUP(int vertical_speed)
 				// to respawn when collision occured with spike in right direction
 				if (((m_levelData[ceil((fut_posx + m_dim.x) / (float)TILE_WIDTH)][floor((fut_posy + m_dim.y) / (float)TILE_WIDTH)] == 'S') ||
 					(m_levelData[ceil((fut_posx + m_dim.x) / (float)TILE_WIDTH)][floor((fut_posy) / (float)TILE_WIDTH)] == 'S')))
+				{
+					int distance = ((int)(fut_posx + m_dim.x)) % TILE_WIDTH;
+					if ((TILE_WIDTH - distance) < MIN_WALL_DISTANCE) {
+						m_hasReachedGround = true;
+						m_position = glm::vec2(130.0f, 48.0f);
+						return;
+					}
+
+				}
+				if ((m_levelData[ceil((m_position.x + m_dim.x) / (float)TILE_WIDTH)][floor((m_position.y + m_dim.y) / (float)TILE_WIDTH)] == 'E') ||
+					(m_levelData[ceil((m_position.x + m_dim.x) / (float)TILE_WIDTH)][floor((m_position.y) / (float)TILE_WIDTH)] == 'E')) {
+					int distance = ((int)(m_position.x + m_dim.x)) % TILE_WIDTH;
+					if ((TILE_WIDTH - distance) < MIN_WALL_DISTANCE) {
+						life = false;
+						std::cout << "Setting false" << std::endl;
+					}
+				}
+				if (((m_levelData[ceil((fut_posx + m_dim.x) / (float)TILE_WIDTH)][floor((fut_posy + m_dim.y) / (float)TILE_WIDTH)] == 's') ||
+					(m_levelData[ceil((fut_posx + m_dim.x) / (float)TILE_WIDTH)][floor((fut_posy) / (float)TILE_WIDTH)] == 's')))
+				{
+					int distance = ((int)(fut_posx + m_dim.x)) % TILE_WIDTH;
+					if ((TILE_WIDTH - distance) < MIN_WALL_DISTANCE) {
+						m_hasReachedGround = true;
+						m_position = glm::vec2(130.0f, 48.0f);
+						return;
+					}
+
+				}
+				if (((m_levelData[ceil((fut_posx + m_dim.x) / (float)TILE_WIDTH)][floor((fut_posy + m_dim.y) / (float)TILE_WIDTH)] == 'l') ||
+					(m_levelData[ceil((fut_posx + m_dim.x) / (float)TILE_WIDTH)][floor((fut_posy) / (float)TILE_WIDTH)] == 'l')))
+				{
+					int distance = ((int)(fut_posx + m_dim.x)) % TILE_WIDTH;
+					if ((TILE_WIDTH - distance) < MIN_WALL_DISTANCE) {
+						m_hasReachedGround = true;
+						m_position = glm::vec2(130.0f, 48.0f);
+						return;
+					}
+
+				}
+				if (((m_levelData[ceil((fut_posx + m_dim.x) / (float)TILE_WIDTH)][floor((fut_posy + m_dim.y) / (float)TILE_WIDTH)] == '+') ||
+					(m_levelData[ceil((fut_posx + m_dim.x) / (float)TILE_WIDTH)][floor((fut_posy) / (float)TILE_WIDTH)] == '+')))
+				{
+					int distance = ((int)(fut_posx + m_dim.x)) % TILE_WIDTH;
+					if ((TILE_WIDTH - distance) < MIN_WALL_DISTANCE) {
+						m_hasReachedGround = true;
+						m_position = glm::vec2(130.0f, 48.0f);
+						return;
+					}
+
+				}
+				if (((m_levelData[ceil((fut_posx + m_dim.x) / (float)TILE_WIDTH)][floor((fut_posy + m_dim.y) / (float)TILE_WIDTH)] == '-') ||
+					(m_levelData[ceil((fut_posx + m_dim.x) / (float)TILE_WIDTH)][floor((fut_posy) / (float)TILE_WIDTH)] == '-')))
 				{
 					int distance = ((int)(fut_posx + m_dim.x)) % TILE_WIDTH;
 					if ((TILE_WIDTH - distance) < MIN_WALL_DISTANCE) {
@@ -345,6 +529,46 @@ void Character::moveLEFT()
 			return;
 		}
 	}
+	if ((m_levelData[floor(m_position.x / (float)TILE_WIDTH) - 1][floor((m_position.y + m_dim.y) / (float)TILE_WIDTH)] == 's') ||
+		(m_levelData[floor((m_position.x) / (float)TILE_WIDTH) - 1][floor((m_position.y) / (float)TILE_WIDTH)] == 's'))	//wall on the left somehwere
+	{
+		int distance = ((int)(m_position.x)) % TILE_WIDTH;
+		if (distance < MIN_WALL_DISTANCE)
+		{
+			m_position = glm::vec2(130.0f, 48.0f);
+			return;
+		}
+	}
+	if ((m_levelData[floor(m_position.x / (float)TILE_WIDTH) - 1][floor((m_position.y + m_dim.y) / (float)TILE_WIDTH)] == 'l') ||
+		(m_levelData[floor((m_position.x) / (float)TILE_WIDTH) - 1][floor((m_position.y) / (float)TILE_WIDTH)] == 'l'))	//wall on the left somehwere
+	{
+		int distance = ((int)(m_position.x)) % TILE_WIDTH;
+		if (distance < MIN_WALL_DISTANCE)
+		{
+			m_position = glm::vec2(130.0f, 48.0f);
+			return;
+		}
+	}
+	if ((m_levelData[floor(m_position.x / (float)TILE_WIDTH) - 1][floor((m_position.y + m_dim.y) / (float)TILE_WIDTH)] == '+') ||
+		(m_levelData[floor((m_position.x) / (float)TILE_WIDTH) - 1][floor((m_position.y) / (float)TILE_WIDTH)] == '+'))	//wall on the left somehwere
+	{
+		int distance = ((int)(m_position.x)) % TILE_WIDTH;
+		if (distance < MIN_WALL_DISTANCE)
+		{
+			m_position = glm::vec2(130.0f, 48.0f);
+			return;
+		}
+	}
+	if ((m_levelData[floor(m_position.x / (float)TILE_WIDTH) - 1][floor((m_position.y + m_dim.y) / (float)TILE_WIDTH)] == '-') ||
+		(m_levelData[floor((m_position.x) / (float)TILE_WIDTH) - 1][floor((m_position.y) / (float)TILE_WIDTH)] == '-'))	//wall on the left somehwere
+	{
+		int distance = ((int)(m_position.x)) % TILE_WIDTH;
+		if (distance < MIN_WALL_DISTANCE)
+		{
+			m_position = glm::vec2(130.0f, 48.0f);
+			return;
+		}
+	}
 
 	if ((m_levelData[floor(m_position.x / (float)TILE_WIDTH) - 1][floor((m_position.y + m_dim.y) / (float)TILE_WIDTH)] != '.') ||
 		(m_levelData[floor((m_position.x) / (float)TILE_WIDTH) - 1][floor((m_position.y) / (float)TILE_WIDTH)] != '.'))	//wall on the left somehwere
@@ -392,6 +616,48 @@ void Character::moveRIGHT()
 			return;
 		}
 	}
+
+	if ((m_levelData[ceil((m_position.x + m_dim.x) / (float)TILE_WIDTH)][floor((m_position.y + m_dim.y) / (float)TILE_WIDTH)] == 'E') ||
+		(m_levelData[ceil((m_position.x + m_dim.x) / (float)TILE_WIDTH)][floor((m_position.y) / (float)TILE_WIDTH)] == 'E')) {
+		int distance = ((int)(m_position.x + m_dim.x)) % TILE_WIDTH;
+		if ((TILE_WIDTH - distance) < MIN_WALL_DISTANCE) {
+			life = false;
+			std::cout << "Setting false" << std::endl;
+		}
+	}
+	if ((m_levelData[ceil((m_position.x + m_dim.x) / (float)TILE_WIDTH)][floor((m_position.y + m_dim.y) / (float)TILE_WIDTH)] == 's') ||
+		(m_levelData[ceil((m_position.x + m_dim.x) / (float)TILE_WIDTH)][floor((m_position.y) / (float)TILE_WIDTH)] == 's')) {
+		int distance = ((int)(m_position.x + m_dim.x)) % TILE_WIDTH;
+		if ((TILE_WIDTH - distance) < MIN_WALL_DISTANCE) {
+			m_position = glm::vec2(130.0f, 48.0f);
+			return;
+		}
+	}
+	if ((m_levelData[ceil((m_position.x + m_dim.x) / (float)TILE_WIDTH)][floor((m_position.y + m_dim.y) / (float)TILE_WIDTH)] == 'l') ||
+		(m_levelData[ceil((m_position.x + m_dim.x) / (float)TILE_WIDTH)][floor((m_position.y) / (float)TILE_WIDTH)] == 'l')) {
+		int distance = ((int)(m_position.x + m_dim.x)) % TILE_WIDTH;
+		if ((TILE_WIDTH - distance) < MIN_WALL_DISTANCE) {
+			m_position = glm::vec2(130.0f, 48.0f);
+			return;
+		}
+	}
+	if ((m_levelData[ceil((m_position.x + m_dim.x) / (float)TILE_WIDTH)][floor((m_position.y + m_dim.y) / (float)TILE_WIDTH)] == '+') ||
+		(m_levelData[ceil((m_position.x + m_dim.x) / (float)TILE_WIDTH)][floor((m_position.y) / (float)TILE_WIDTH)] == '+')) {
+		int distance = ((int)(m_position.x + m_dim.x)) % TILE_WIDTH;
+		if ((TILE_WIDTH - distance) < MIN_WALL_DISTANCE) {
+			m_position = glm::vec2(130.0f, 48.0f);
+			return;
+		}
+	}
+	if ((m_levelData[ceil((m_position.x + m_dim.x) / (float)TILE_WIDTH)][floor((m_position.y + m_dim.y) / (float)TILE_WIDTH)] == '-') ||
+		(m_levelData[ceil((m_position.x + m_dim.x) / (float)TILE_WIDTH)][floor((m_position.y) / (float)TILE_WIDTH)] == '-')) {
+		int distance = ((int)(m_position.x + m_dim.x)) % TILE_WIDTH;
+		if ((TILE_WIDTH - distance) < MIN_WALL_DISTANCE) {
+			m_position = glm::vec2(130.0f, 48.0f);
+			return;
+		}
+	}
+
 
 	if ((m_levelData[ceil((m_position.x + m_dim.x) / (float)TILE_WIDTH)][floor((m_position.y + m_dim.y) / (float)TILE_WIDTH)] != '.') ||
 		(m_levelData[ceil((m_position.x + m_dim.x) / (float)TILE_WIDTH)][floor((m_position.y) / (float)TILE_WIDTH)] != '.'))	//wall on the right
