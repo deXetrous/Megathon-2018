@@ -69,7 +69,7 @@ private:
 	int m_vertical_speed = 0;
 	float m_speed;
 	float m_gravity = -1.8;
-	int m_health = 7;
+	int m_health = 1;
 	int m_score = 0;
 	std::vector<std::string> m_levelData;
 	

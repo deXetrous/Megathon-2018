@@ -80,7 +80,7 @@ void MainGameServer::initSystems()
 
 	m_mainPlayer = &(m_chars[m_currentIndex]);		//pointer to main player 
 
-	_heartTexID = ResourceManager::getTexture("../Sparky-core/Textures/Health.png").id;
+	_heartTexID = ResourceManager::getTexture("../Sparky-core/Textures/assets/boost.png").id;
 }
 
 //function to initialize shaders
@@ -639,7 +639,7 @@ void MainGameServer::drawGame()
 	}
 
 	int health = m_mainPlayer->getHealth();
-	_heartPos = _camera.convertScreenToWorld(glm::vec2(40.0f, 40.0f));
+	_heartPos = _camera.convertScreenToWorld(glm::vec2(40.0f, 70.0f));
 
 	#pragma omp parallel for
 	for (int i = 0; i < health; i++)

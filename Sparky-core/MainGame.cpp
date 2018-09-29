@@ -80,7 +80,7 @@ void MainGame::initSystems()
 		m_chars.emplace_back(m_players[i].name, m_players[i].position, m_players[i].playerIndex, m_playerDim, 1.23, m_leveldata);
 	}
 
-	_heartTexID = ResourceManager::getTexture("../Sparky-core/Textures/Health.png").id;
+	_heartTexID = ResourceManager::getTexture("../Sparky-core/Textures/assets/boost.png").id;
 
 	m_mainPlayer = &(m_chars[m_currentIndex]);		//pointer to main player 
 }
@@ -363,8 +363,7 @@ void MainGame::drawGame()
 
 
 	int health = m_mainPlayer->getHealth();
-	float mana = 100.0f;
-	_heartPos = _camera.convertScreenToWorld(glm::vec2(40.0f, 40.0f));
+	_heartPos = _camera.convertScreenToWorld(glm::vec2(40.0f, 70.0f));
 
 	#pragma omp parallel for
 	for (int i = 0; i < health; i++)

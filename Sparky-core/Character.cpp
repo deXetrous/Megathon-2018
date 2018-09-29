@@ -591,6 +591,36 @@ void Character::moveLEFT()
 			m_direction = 1;
 			return;
 		}
+		if (((m_levelData[floor(m_position.x / (float)TILE_WIDTH)][floor((m_position.y) / (float)TILE_WIDTH) - 1] == 'S') ||
+			(m_levelData[floor((m_position.x + m_dim.x) / (float)TILE_WIDTH)][floor((m_position.y) / (float)TILE_WIDTH) - 1] == 'S'))) //wall below somewhere
+		{
+			m_position = glm::vec2(130.0f, 48.0f);
+			return;
+		}
+		if (((m_levelData[floor(m_position.x / (float)TILE_WIDTH)][floor((m_position.y) / (float)TILE_WIDTH) - 1] == 's') ||
+			(m_levelData[floor((m_position.x + m_dim.x) / (float)TILE_WIDTH)][floor((m_position.y) / (float)TILE_WIDTH) - 1] == 's'))) //wall below somewhere
+		{
+			m_position = glm::vec2(130.0f, 48.0f);
+			return;
+		}
+		if (((m_levelData[floor(m_position.x / (float)TILE_WIDTH)][floor((m_position.y) / (float)TILE_WIDTH) - 1] == 'l') ||
+			(m_levelData[floor((m_position.x + m_dim.x) / (float)TILE_WIDTH)][floor((m_position.y) / (float)TILE_WIDTH) - 1] == 'l'))) //wall below somewhere
+		{
+			m_position = glm::vec2(130.0f, 48.0f);
+			return;
+		}
+		if (((m_levelData[floor(m_position.x / (float)TILE_WIDTH)][floor((m_position.y) / (float)TILE_WIDTH) - 1] == '+') ||
+			(m_levelData[floor((m_position.x + m_dim.x) / (float)TILE_WIDTH)][floor((m_position.y) / (float)TILE_WIDTH) - 1] == '+'))) //wall below somewhere
+		{
+			m_position = glm::vec2(130.0f, 48.0f);
+			return;
+		}
+		if (((m_levelData[floor(m_position.x / (float)TILE_WIDTH)][floor((m_position.y) / (float)TILE_WIDTH) - 1] == '-') ||
+			(m_levelData[floor((m_position.x + m_dim.x) / (float)TILE_WIDTH)][floor((m_position.y) / (float)TILE_WIDTH) - 1] == '-'))) //wall below somewhere
+		{
+			m_position = glm::vec2(130.0f, 48.0f);
+			return;
+		}
 		// std::cout << "x index = " << floor(m_position.x / (float)TILE_WIDTH) << ", y index = " << floor(m_position.y / (float)TILE_WIDTH) - 1 << std::endl;
 		is_d_pressed = true;
 		m_position += glm::vec2(-m_speed, 0.0f);
@@ -679,6 +709,36 @@ void Character::moveRIGHT()
 			m_is_called_by = 0;
 			m_first_time = true;
 			m_direction = 1;
+			return;
+		}
+		if (((m_levelData[floor(m_position.x / (float)TILE_WIDTH)][floor((m_position.y) / (float)TILE_WIDTH) - 1] == 'S') ||
+			(m_levelData[floor((m_position.x + m_dim.x) / (float)TILE_WIDTH)][floor((m_position.y) / (float)TILE_WIDTH) - 1] == 'S'))) //wall below somewhere
+		{
+			m_position = glm::vec2(130.0f, 48.0f);
+			return;
+		}
+		if (((m_levelData[floor(m_position.x / (float)TILE_WIDTH)][floor((m_position.y) / (float)TILE_WIDTH) - 1] == 's') ||
+			(m_levelData[floor((m_position.x + m_dim.x) / (float)TILE_WIDTH)][floor((m_position.y) / (float)TILE_WIDTH) - 1] == 's'))) //wall below somewhere
+		{
+			m_position = glm::vec2(130.0f, 48.0f);
+			return;
+		}
+		if (((m_levelData[floor(m_position.x / (float)TILE_WIDTH)][floor((m_position.y) / (float)TILE_WIDTH) - 1] == 'l') ||
+			(m_levelData[floor((m_position.x + m_dim.x) / (float)TILE_WIDTH)][floor((m_position.y) / (float)TILE_WIDTH) - 1] == 'l'))) //wall below somewhere
+		{
+			m_position = glm::vec2(130.0f, 48.0f);
+			return;
+		}
+		if (((m_levelData[floor(m_position.x / (float)TILE_WIDTH)][floor((m_position.y) / (float)TILE_WIDTH) - 1] == '+') ||
+			(m_levelData[floor((m_position.x + m_dim.x) / (float)TILE_WIDTH)][floor((m_position.y) / (float)TILE_WIDTH) - 1] == '+'))) //wall below somewhere
+		{
+			m_position = glm::vec2(130.0f, 48.0f);
+			return;
+		}
+		if (((m_levelData[floor(m_position.x / (float)TILE_WIDTH)][floor((m_position.y) / (float)TILE_WIDTH) - 1] == '-') ||
+			(m_levelData[floor((m_position.x + m_dim.x) / (float)TILE_WIDTH)][floor((m_position.y) / (float)TILE_WIDTH) - 1] == '-'))) //wall below somewhere
+		{
+			m_position = glm::vec2(130.0f, 48.0f);
 			return;
 		}
 
