@@ -58,7 +58,7 @@ void MainGame::initSystems()
 {
 	ArrowsIoEngine::init();		//initializing game engine
 
-	_window.create("Arrows.Io", _screenWidth, _screenHeight, 0);	//creating a window
+	_window.create("BoxRunner2D", _screenWidth, _screenHeight, 0);	//creating a window
 
 	initShaders();	//initializing shaders
 

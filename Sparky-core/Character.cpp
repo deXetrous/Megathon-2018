@@ -4,7 +4,7 @@
 //initializing the defalut constructor values
 Character::Character(std::string name, glm::vec2 pos, int person, glm::vec2 dim, float speed, const std::vector<std::string>& levelData)
 {
-	m_health = 7;
+	m_health = 1;
 	m_name = name;
 	m_position = pos;
 	m_person = person;
