@@ -69,6 +69,9 @@ Level::Level(const std::string& fileName, int screenWidth, int screenHeight)
 			case 's':
 				m_spriteBatch.draw(destRect, uvRect, spikeUpId, 0.0f, color);
 				break;
+			case 'E':
+				m_spriteBatch.draw(destRect, uvRect, winningBrick, 0.0f, color);
+				break;
 			case '.':
 				m_spriteBatch.draw(destRect, uvRect, floorId, 0.0f, color);
 				break;

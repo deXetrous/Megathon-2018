@@ -14,7 +14,7 @@ using namespace ArrowsIoEngine;
 class Character
 {
 public:
-	Character(std::string name, glm::vec2 pos, int person, glm::vec2 dim, int speed, const std::vector<std::string>& levelData);
+	Character(std::string name, glm::vec2 pos, int person, glm::vec2 dim, float speed, const std::vector<std::string>& levelData);
 	~Character();
 	int timer_nitro = 0;
 	void draw(SpriteBatch& spriteBatch);
@@ -32,7 +32,7 @@ public:
 	float air_pos_x = getPosition().x, air_pos_y = getPosition().y;
 	bool is_d_pressed = false;
 	bool is_a_pressed = false;
-	int h_speed = 0;
+	float h_speed = 0;
 	bool c1 = false;
 	bool c2 = false;
 	bool c3 = false;
@@ -67,8 +67,8 @@ private:
 	GLuint m_texId;	//stores the ids of the textures. non-shooting mode, shooting mode
 	int m_state;	//stores if it is in shooting mode or non shooting mode
 	int m_vertical_speed = 0;
-	int m_speed;
-	int m_gravity = -1;
+	float m_speed;
+	float m_gravity = -1.8;
 	int m_health = 7;
 	int m_score = 0;
 	std::vector<std::string> m_levelData;

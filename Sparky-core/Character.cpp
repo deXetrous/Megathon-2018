@@ -2,7 +2,7 @@
 #include <iostream>
 
 //initializing the defalut constructor values
-Character::Character(std::string name, glm::vec2 pos, int person, glm::vec2 dim, int speed, const std::vector<std::string>& levelData)
+Character::Character(std::string name, glm::vec2 pos, int person, glm::vec2 dim, float speed, const std::vector<std::string>& levelData)
 {
 	m_health = 7;
 	m_name = name;
@@ -34,7 +34,7 @@ void Character::nitro()
 	{
 		
 		if(!timer_nitro)
-			m_speed =  m_speed << 1;
+			m_speed =  m_speed * 2;
 		timer_nitro += 100;
 		
 		m_health--;
@@ -62,12 +62,12 @@ bool Character::damageTaken(int damage, int livePlayers, int callerPlayer, int p
 
 void Character::setDefaultSpeed()
 {
-	m_speed = m_speed >> 1;
+	m_speed = m_speed / 2;
 }
 
 void Character::setDefaultSpeedBlack()
 {
-	m_speed = m_speed << 1;
+	m_speed = m_speed * 2;
 }
 
 //func to increase health
@@ -80,7 +80,7 @@ void Character::increaseHealth()
 void Character::decHealth()
 {
 	if(!timer_slow)
-	m_speed = m_speed >> 1;
+	m_speed = m_speed / 2;
 	timer_slow = 150;
 }
 
