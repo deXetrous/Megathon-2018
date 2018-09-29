@@ -28,4 +28,5 @@ private:
 	GLuint spikeDownId;
 	GLuint spikeHalfId;
 	GLuint spikeSmalId;
+	GLuint winningBrick;
 };
