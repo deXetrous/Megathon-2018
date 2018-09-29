@@ -81,7 +81,7 @@ void Character::decHealth()
 {
 	if(!timer_slow)
 	m_speed = m_speed >> 1;
-	timer_slow = 50;
+	timer_slow = 150;
 }
 
 //function to get data
