@@ -522,14 +522,11 @@ void MainGameServer::processInput()
 
 		}
 
-		if (_inputManager.isKeyDown(SDLK_w)) {
+		if (_inputManager.isKeyDown(SDLK_SPACE)) {
 			m_mainPlayer->m_is_called_by = 0;
 			m_mainPlayer->m_direction = 1;
 			m_mainPlayer->moveUP(3);
 		}
-
-		if (_inputManager.isKeyDown(SDLK_s))
-			m_mainPlayer->moveDOWN();
 
 		if (_inputManager.isKeyDown(SDLK_a))
 			m_mainPlayer->moveLEFT();
