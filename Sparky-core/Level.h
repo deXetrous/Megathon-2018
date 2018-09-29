@@ -29,4 +29,5 @@ private:
 	GLuint spikeHalfId;
 	GLuint spikeSmalId;
 	GLuint winningBrick;
+	GLuint jumpBrick;
 };

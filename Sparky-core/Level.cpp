@@ -18,6 +18,7 @@ Level::Level(const std::string& fileName, int screenWidth, int screenHeight)
 	spikeDownId = ResourceManager::getTexture("../Sparky-core/Textures/assets/spike-down.png").id;
 	spikeHalfId = ResourceManager::getTexture("../Sparky-core/Textures/assets/spike-half.png").id;
 	winningBrick = ResourceManager::getTexture("../Sparky-core/Textures/assets/win-brick.png").id;
+	jumpBrick = ResourceManager::getTexture("../Sparky-core/Textures/assets/jumppad.png").id;
 
 	//opening the level file
 	std::ifstream file;
@@ -74,6 +75,9 @@ Level::Level(const std::string& fileName, int screenWidth, int screenHeight)
 				break;
 			case '.':
 				m_spriteBatch.draw(destRect, uvRect, floorId, 0.0f, color);
+				break;
+			case 'G':
+				m_spriteBatch.draw(destRect, uvRect, jumpBrick, 0.0f, color);
 				break;
 			default:
 				std::cout << "Unexpected symbol " << tile << " at (" << y << ", " << x << ")\n";

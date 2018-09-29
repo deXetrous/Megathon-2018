@@ -62,7 +62,7 @@ void MainGame::initSystems()
 
 	initShaders();	//initializing shaders
 
-	for (int i = 0; i < 24; i++)		//loop for position of hearts
+	for (int i = 0; i < 30; i++)		//loop for position of hearts
 	{
 		_hearts.emplace_back(i);
 	}
