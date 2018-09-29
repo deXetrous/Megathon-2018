@@ -59,7 +59,7 @@ void MainGameServer::initSystems()
 	initShaders();		//initializing shaders
 
 	#pragma omp parallel for
-	for (int i = 0; i < 24; i++)		//loop for position of hearts
+	for (int i = 0; i < 30; i++)		//loop for position of hearts
 	{
 		_hearts.emplace_back(i);
 	}
@@ -374,7 +374,10 @@ void MainGameServer::updateHearts()
 		if (diff_x <= 25.0f && diff_y <= 25.0f && _hearts[i].getVisiblity())	//if a player takes a heart
 		{
 			m_mainPlayer->setHeart(i);
-			m_mainPlayer->increaseHealth();
+			if(_hearts[i].per_colour == 1)
+				m_mainPlayer->increaseHealth();
+			if (_hearts[i].per_colour == 0)
+				m_mainPlayer->decHealth();
 			break;
 		}
 
@@ -436,6 +439,28 @@ void MainGameServer::processInput()
 			m_mainPlayer->moveUP(0);
 		}
 		return;
+	}
+
+	if (m_mainPlayer->timer_nitro > 0)
+	{
+		m_mainPlayer->timer_nitro--;
+		std::cout << "timer left" << m_mainPlayer->timer_nitro << std::endl;
+		if (m_mainPlayer->timer_nitro == 0)
+		{
+			std::cout << "Setting default " << std::endl;
+			m_mainPlayer->setDefaultSpeed();
+		}
+	}
+
+	if (m_mainPlayer->timer_slow > 0)
+	{
+		m_mainPlayer->timer_slow--;
+		//std::cout << "timer left" << m_mainPlayer->timer_nitro << std::endl;
+		if (m_mainPlayer->timer_slow == 0)
+		{
+			std::cout << "Setting default " << std::endl;
+			m_mainPlayer->setDefaultSpeedBlack();
+		}
 	}
 
 		while (SDL_PollEvent(&evnt))
@@ -534,6 +559,9 @@ void MainGameServer::processInput()
 
 		if (_inputManager.isKeyDown(SDLK_d))
 			m_mainPlayer->moveRIGHT();
+
+		if (_inputManager.isKeyPressed(SDLK_n))
+			m_mainPlayer->nitro();
 
 		if (_inputManager.isKeyDown(SDLK_d) == false && _inputManager.isKeyDown(SDLK_a) == false)
 			m_mainPlayer->h_speed = 0;

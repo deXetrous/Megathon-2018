@@ -5,7 +5,7 @@ using namespace ArrowsIoEngine;
 hearts::hearts(int index)
 {
 	_index = index;
-	_dim = glm::vec2(20.0f, 20.0f);
+	_dim = glm::vec2(30.0f, 30.0f);
 
 	//opening the level file
 	std::ifstream file;
@@ -29,11 +29,17 @@ hearts::hearts(int index)
 		{
 			if (m_levelData[y][x] == '@') {
 				heartPosition.push_back(glm::vec2(y, x));
+				colours.push_back(1);
+			}
+			if (m_levelData[y][x] == '#') {
+				heartPosition.push_back(glm::vec2(y, x));
+				colours.push_back(0);
 			}
 		}
 	}
 
 	_postion = heartPosition[index];
+	per_colour = colours[index];
 
 }
 
@@ -50,9 +56,17 @@ void hearts::draw(ArrowsIoEngine::SpriteBatch & spriteBatch)
 	color.g = 255;
 	color.b = 255;
 	color.a = 255;
+	static GLuint texture;
 
-	static GLuint texture = ResourceManager::getTexture("../Sparky-core/Textures/heart.png").id;
-	spriteBatch.draw(glm::vec4((_postion.x) * 45, (_postion.y) * 45, _dim.x, _dim.y), uv, texture, 0.0f, color);
+	if (per_colour)
+	{
+		 texture = ResourceManager::getTexture("../Sparky-core/Textures/assets/boost+.png").id;
+	}
+	else
+	{ 
+		texture = ResourceManager::getTexture("../Sparky-core/Textures/assets/boost-.png").id;
+	}
+	spriteBatch.draw(glm::vec4((_postion.x) * 45+8, (_postion.y) * 45+8, _dim.x, _dim.y), uv, texture , 0.0f, color);
 }
 
 //function for the visiblity of the heart

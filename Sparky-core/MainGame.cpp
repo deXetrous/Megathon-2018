@@ -62,7 +62,7 @@ void MainGame::initSystems()
 
 	initShaders();	//initializing shaders
 
-	for (int i = 0; i < 24; i++)		//loop for position of hearts
+	for (int i = 0; i < 30; i++)		//loop for position of hearts
 	{
 		_hearts.emplace_back(i);
 	}
@@ -106,7 +106,7 @@ void MainGame::gameLoop()
 
 		_inputManager.update();			//updating the input manager
 
-		std::cout << "Printing the life:" << m_mainPlayer->getLife() << std::endl;
+		//std::cout << "Printing the life:" << m_mainPlayer->getLife() << std::endl;
 
 		if (m_mainPlayer->getLife())
 			processInput();				//processing the input given by the player
@@ -163,6 +163,8 @@ void MainGame::processInput()
 	const float CAMERA_SPEED = 2.0f;
 	const float SCALE_SPEED = 0.1f;
 
+	
+
 	if (!m_mainPlayer->m_hasReachedGround) {
 		if (m_mainPlayer->m_is_called_by == 0) {
 			m_mainPlayer->moveUP(3);
@@ -172,6 +174,29 @@ void MainGame::processInput()
 		}
 		return;
 	}
+
+	if (m_mainPlayer->timer_nitro > 0)
+	{
+		m_mainPlayer->timer_nitro--;
+		std::cout << "timer left" << m_mainPlayer->timer_nitro <<  std::endl;
+		if (m_mainPlayer->timer_nitro == 0)
+		{
+			std::cout << "Setting default " << std::endl;
+			m_mainPlayer->setDefaultSpeed();
+		}
+	}
+
+	if (m_mainPlayer->timer_slow > 0)
+	{
+		m_mainPlayer->timer_slow--;
+		std::cout << "timer left" << m_mainPlayer->timer_slow << std::endl;
+		if (m_mainPlayer->timer_slow == 0)
+		{
+			std::cout << "Setting default " << std::endl;
+			m_mainPlayer->setDefaultSpeedBlack();
+		}
+	}
+	
 
 	while (SDL_PollEvent(&evnt))
 	{
@@ -264,6 +289,9 @@ void MainGame::processInput()
 
 	if (_inputManager.isKeyDown(SDLK_d))
 		m_mainPlayer->moveRIGHT();
+
+	if (_inputManager.isKeyPressed(SDLK_n))
+		m_mainPlayer->nitro();
 
 	if (_inputManager.isKeyDown(SDLK_d) == false && _inputManager.isKeyDown(SDLK_a) == false)
 		m_mainPlayer->h_speed = 0;
@@ -594,7 +622,10 @@ void MainGame::updateHearts()
 		if (diff_x <= 25.0f && diff_y <= 25.0f && _hearts[i].getVisiblity())		//if a player takes a heart
 		{
 			m_mainPlayer->setHeart(i);
-			m_mainPlayer->increaseHealth();
+			if (_hearts[i].per_colour == 1)
+				m_mainPlayer->increaseHealth();
+			if (_hearts[i].per_colour == 0)
+				m_mainPlayer->decHealth();
 			break;
 		}
 
