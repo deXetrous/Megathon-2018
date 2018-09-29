@@ -8,6 +8,7 @@ using namespace ArrowsIoEngine;
 Level::Level(const std::string& fileName, int screenWidth, int screenHeight)
 {
 	//initializing ids for the level
+
 	brick1Id = ResourceManager::getTexture("../Sparky-core/Textures/assets/brick-1.png").id;
 	brick2Id = ResourceManager::getTexture("../Sparky-core/Textures/assets/brick-1.png").id;
 	floorId = ResourceManager::getTexture("../Sparky-core/Textures/assets/back.png").id;
@@ -53,20 +54,11 @@ Level::Level(const std::string& fileName, int screenWidth, int screenHeight)
 			case 'L':
 				m_spriteBatch.draw(destRect, uvRect, brick1Id, 0.0f, color);
 				break;
-			case '-':
-				m_spriteBatch.draw(destRect, uvRect, spikeMinusId, 0.0f, color);
-				break;
-			case '+':
-				m_spriteBatch.draw(destRect, uvRect, spikePlusId, 0.0f, color);
-				break;
-			case 'l':
-				m_spriteBatch.draw(destRect, uvRect, spikeHalfId, 0.0f, color);
+			case 'G':
+				m_spriteBatch.draw(destRect, uvRect, grassId, 0.0f, color);
 				break;
 			case 'S':
-				m_spriteBatch.draw(destRect, uvRect, spikeDownId, 0.0f, color);
-				break;
-			case 's':
-				m_spriteBatch.draw(destRect, uvRect, spikeUpId, 0.0f, color);
+				m_spriteBatch.draw(destRect, uvRect, spikeId, 0.0f, color);
 				break;
 			case 'E':
 				m_spriteBatch.draw(destRect, uvRect, winningBrick, 0.0f, color);

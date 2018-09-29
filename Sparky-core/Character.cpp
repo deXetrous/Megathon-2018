@@ -2,7 +2,7 @@
 #include <iostream>
 
 //initializing the defalut constructor values
-Character::Character(std::string name, glm::vec2 pos, int person, glm::vec2 dim, float speed, const std::vector<std::string>& levelData)
+Character::Character(std::string name, glm::vec2 pos, int person, glm::vec2 dim, int speed, const std::vector<std::string>& levelData)
 {
 	m_health = 7;
 	m_name = name;
@@ -28,6 +28,19 @@ void Character::setData(float x, float y, int health)
 	m_health = health;
 }
 
+void Character::nitro()
+{
+	if (m_health > 0)
+	{
+		
+		if(!timer_nitro)
+			m_speed =  m_speed << 1;
+		timer_nitro += 100;
+		
+		m_health--;
+	}
+}
+
 //setting the heart to take 
 void Character::setHeart(int heart)
 {
@@ -42,10 +55,19 @@ bool Character::damageTaken(int damage, int livePlayers, int callerPlayer, int p
 	{
 		if (callerPlayer == playerType && life == true)
 			std::cout << m_name << " You are dead and Your Rank is :  " << livePlayers << std::endl;
-		life = false;
 		return true;
 	}
 	return false;
+}
+
+void Character::setDefaultSpeed()
+{
+	m_speed = m_speed >> 1;
+}
+
+void Character::setDefaultSpeedBlack()
+{
+	m_speed = m_speed << 1;
 }
 
 //func to increase health
@@ -53,6 +75,13 @@ void Character::increaseHealth()
 {
 	if (m_health < 7)
 		m_health++;
+}
+
+void Character::decHealth()
+{
+	if(!timer_slow)
+	m_speed = m_speed >> 1;
+	timer_slow = 150;
 }
 
 //function to get data
@@ -70,7 +99,7 @@ void Character::draw(SpriteBatch& spriteBatch)
 
 //function to move the characters
 
-void Character::moveUP(float vertical_speed)
+void Character::moveUP(int vertical_speed)
 {
 	/*if ((m_levelData[floor(m_position.x / (float)TILE_WIDTH)][ceil((m_position.y + m_dim.y) / (float)TILE_WIDTH)] != '.') ||
 		(m_levelData[floor((m_position.x + m_dim.x) / (float)TILE_WIDTH)][ceil((m_position.y + m_dim.y) / (float)TILE_WIDTH)] != '.'))		//wall above somewhere
@@ -273,6 +302,18 @@ void Character::moveUP(float vertical_speed)
 						return;
 					}
 
+				}
+
+				if (((m_levelData[floor(fut_posx / (float)TILE_WIDTH)][floor((fut_posy) / (float)TILE_WIDTH) - 1] == 'G') ||
+					(m_levelData[floor((fut_posx + m_dim.x) / (float)TILE_WIDTH)][floor((fut_posy) / (float)TILE_WIDTH) - 1] == 'G')))
+				{
+					int distance = ((int)(fut_posy)) % TILE_WIDTH;
+					if (distance < MIN_WALL_DISTANCE) {
+						m_is_called_by = 0;
+						m_first_time = true;
+						m_direction = 1;
+						return;
+					}
 				}
 
 				// std::cout << "Going to change yyy " << std::endl;
@@ -540,6 +581,16 @@ void Character::moveLEFT()
 	if (((m_levelData[floor(m_position.x / (float)TILE_WIDTH)][floor((m_position.y) / (float)TILE_WIDTH) - 1] != '.') ||
 		(m_levelData[floor((m_position.x + m_dim.x) / (float)TILE_WIDTH)][floor((m_position.y) / (float)TILE_WIDTH) - 1] != '.'))) //wall below somewhere
 	{
+
+		if (((m_levelData[floor(m_position.x / (float)TILE_WIDTH)][floor((m_position.y) / (float)TILE_WIDTH) - 1] == 'G') ||
+			(m_levelData[floor((m_position.x + m_dim.x) / (float)TILE_WIDTH)][floor((m_position.y) / (float)TILE_WIDTH) - 1] == 'G'))) //wall below somewhere
+		{
+			m_hasReachedGround = false;
+			m_is_called_by = 0;
+			m_first_time = true;
+			m_direction = 1;
+			return;
+		}
 		// std::cout << "x index = " << floor(m_position.x / (float)TILE_WIDTH) << ", y index = " << floor(m_position.y / (float)TILE_WIDTH) - 1 << std::endl;
 		is_d_pressed = true;
 		m_position += glm::vec2(-m_speed, 0.0f);
@@ -620,6 +671,17 @@ void Character::moveRIGHT()
 	if (((m_levelData[floor(m_position.x / (float)TILE_WIDTH)][floor((m_position.y) / (float)TILE_WIDTH) - 1] != '.') ||
 				(m_levelData[floor((m_position.x + m_dim.x) / (float)TILE_WIDTH)][floor((m_position.y) / (float)TILE_WIDTH) - 1] != '.'))) //wall below somewhere
 	{
+
+		if (((m_levelData[floor(m_position.x / (float)TILE_WIDTH)][floor((m_position.y) / (float)TILE_WIDTH) - 1] == 'G') ||
+			(m_levelData[floor((m_position.x + m_dim.x) / (float)TILE_WIDTH)][floor((m_position.y) / (float)TILE_WIDTH) - 1] == 'G'))) //wall below somewhere
+		{
+			m_hasReachedGround = false;
+			m_is_called_by = 0;
+			m_first_time = true;
+			m_direction = 1;
+			return;
+		}
+
 		// std::cout << "x index = " << floor(m_position.x / (float)TILE_WIDTH) << ", y index = " << floor(m_position.y / (float)TILE_WIDTH) - 1 << std::endl;
 		is_d_pressed = true;
 		m_position += glm::vec2(m_speed, 0.0f);

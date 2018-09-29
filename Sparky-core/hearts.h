@@ -24,6 +24,8 @@ public:
 	int getHeartIndex() { return _index; }
 	
 	std::vector <glm::vec2> heartPosition;
+	std::vector <int> colours;
+	int per_colour;
 
 private:
 	glm::vec2 _postion;

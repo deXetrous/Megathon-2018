@@ -77,7 +77,7 @@ void MainGame::initSystems()
 
 	for (int i = 0; i < m_noOfPlayers; i++)		// creating players
 	{
-		m_chars.emplace_back(m_players[i].name, m_players[i].position, m_players[i].playerIndex, m_playerDim, 1.23, m_leveldata);
+		m_chars.emplace_back(m_players[i].name, m_players[i].position, m_players[i].playerIndex, m_playerDim, 2, m_leveldata);
 	}
 
 	_heartTexID = ResourceManager::getTexture("../Sparky-core/Textures/Health.png").id;
@@ -163,15 +163,40 @@ void MainGame::processInput()
 	const float CAMERA_SPEED = 2.0f;
 	const float SCALE_SPEED = 0.1f;
 
+	
+
 	if (!m_mainPlayer->m_hasReachedGround) {
 		if (m_mainPlayer->m_is_called_by == 0) {
-			m_mainPlayer->moveUP(3);
+			m_mainPlayer->moveUP(2);
 		}
 		else {
 			m_mainPlayer->moveUP(0);
 		}
 		return;
 	}
+
+	if (m_mainPlayer->timer_nitro > 0)
+	{
+		m_mainPlayer->timer_nitro--;
+		std::cout << "timer left" << m_mainPlayer->timer_nitro <<  std::endl;
+		if (m_mainPlayer->timer_nitro == 0)
+		{
+			std::cout << "Setting default " << std::endl;
+			m_mainPlayer->setDefaultSpeed();
+		}
+	}
+
+	if (m_mainPlayer->timer_slow > 0)
+	{
+		m_mainPlayer->timer_slow--;
+		std::cout << "timer left" << m_mainPlayer->timer_slow << std::endl;
+		if (m_mainPlayer->timer_slow == 0)
+		{
+			std::cout << "Setting default " << std::endl;
+			m_mainPlayer->setDefaultSpeedBlack();
+		}
+	}
+	
 
 	while (SDL_PollEvent(&evnt))
 	{
@@ -255,7 +280,7 @@ void MainGame::processInput()
 	if (_inputManager.isKeyDown(SDLK_SPACE)) {
 		m_mainPlayer->m_is_called_by = 0;
 		m_mainPlayer->m_direction = 1;
-		m_mainPlayer->moveUP(3);
+		m_mainPlayer->moveUP(2);
 	}
 
 
@@ -264,6 +289,9 @@ void MainGame::processInput()
 
 	if (_inputManager.isKeyDown(SDLK_d))
 		m_mainPlayer->moveRIGHT();
+
+	if (_inputManager.isKeyPressed(SDLK_n))
+		m_mainPlayer->nitro();
 
 	if (_inputManager.isKeyDown(SDLK_d) == false && _inputManager.isKeyDown(SDLK_a) == false)
 		m_mainPlayer->h_speed = 0;
@@ -594,7 +622,10 @@ void MainGame::updateHearts()
 		if (diff_x <= 25.0f && diff_y <= 25.0f && _hearts[i].getVisiblity())		//if a player takes a heart
 		{
 			m_mainPlayer->setHeart(i);
-			m_mainPlayer->increaseHealth();
+			if (_hearts[i].per_colour == 1)
+				m_mainPlayer->increaseHealth();
+			if (_hearts[i].per_colour == 0)
+				m_mainPlayer->decHealth();
 			break;
 		}
 

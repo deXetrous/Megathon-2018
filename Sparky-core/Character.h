@@ -14,23 +14,31 @@ using namespace ArrowsIoEngine;
 class Character
 {
 public:
-	Character(std::string name, glm::vec2 pos, int person, glm::vec2 dim, float speed, const std::vector<std::string>& levelData);
+	Character(std::string name, glm::vec2 pos, int person, glm::vec2 dim, int speed, const std::vector<std::string>& levelData);
 	~Character();
+	int timer_nitro = 0;
 	void draw(SpriteBatch& spriteBatch);
-	void moveUP(float vertical_speed);
+	void moveUP(int vertical_speed);
 	void moveDOWN();
 	void moveRIGHT();
 	void moveLEFT();
+	void setDefaultSpeedBlack();
+	void nitro();
+	void setDefaultSpeed();
+	void decHealth();
+	int timer_slow = 0;
 	// make private
 	int m_time_rem = 0;
 	float air_pos_x = getPosition().x, air_pos_y = getPosition().y;
 	bool is_d_pressed = false;
 	bool is_a_pressed = false;
-	float h_speed = 0;
+	int h_speed = 0;
 	bool c1 = false;
 	bool c2 = false;
+	bool c3 = false;
+	bool c4 = false;
 	int m_is_called_by = 1;
-	bool m_hasReachedGround = true;
+	bool m_hasReachedGround = false;
 	bool m_first_time = true;
 	int m_direction = -1;	// 0 means steady, -1 means down and 1 means up
 
@@ -59,8 +67,8 @@ private:
 	GLuint m_texId;	//stores the ids of the textures. non-shooting mode, shooting mode
 	int m_state;	//stores if it is in shooting mode or non shooting mode
 	int m_vertical_speed = 0;
-	float m_speed;
-	float m_gravity = -1.8;
+	int m_speed;
+	int m_gravity = -1;
 	int m_health = 7;
 	int m_score = 0;
 	std::vector<std::string> m_levelData;
