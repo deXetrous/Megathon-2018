@@ -22,10 +22,6 @@ private:
 	GLuint brick2Id;
 	GLuint grassId;
 	GLuint floorId;
-	GLuint spikeMinusId;
-	GLuint spikePlusId;
-	GLuint spikeUpId;
-	GLuint spikeDownId;
-	GLuint spikeHalfId;
-	GLuint spikeSmalId;
+	GLuint spikeId;
+
 };

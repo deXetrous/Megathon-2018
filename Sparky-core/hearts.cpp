@@ -29,11 +29,17 @@ hearts::hearts(int index)
 		{
 			if (m_levelData[y][x] == '@') {
 				heartPosition.push_back(glm::vec2(y, x));
+				colours.push_back(1);
+			}
+			if (m_levelData[y][x] == '#') {
+				heartPosition.push_back(glm::vec2(y, x));
+				colours.push_back(0);
 			}
 		}
 	}
 
 	_postion = heartPosition[index];
+	per_colour = colours[index];
 
 }
 
