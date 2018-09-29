@@ -31,7 +31,7 @@ namespace ArrowsIoEngine {
 		if (_needsMatrixUpdate) {
 
 			// Camera Translation
-			glm::vec3 translate(-_position.x + _screenWidth / 2, -_position.y + _screenHeight / 2, 0.0f);
+			glm::vec3 translate(-_position.x - 310.0f + _screenWidth / 2, /*-_position.y*/ - 340.0f + _screenHeight / 2, 0.0f);
 			_cameraMatrix = glm::translate(_orthoMatrix, translate);
 			
 			// Camera Scale

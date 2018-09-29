@@ -639,7 +639,8 @@ void MainGameServer::drawGame()
 	}
 
 	int health = m_mainPlayer->getHealth();
-	_heartPos = _camera.convertScreenToWorld(glm::vec2(40.0f, 70.0f));
+	_heartPos = _camera.convertScreenToWorld(glm::vec2(370.0f, -296.0f));
+	_heartPos.y -= m_mainPlayer->getPosition().y;
 
 	#pragma omp parallel for
 	for (int i = 0; i < health; i++)
