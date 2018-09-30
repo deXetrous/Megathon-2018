@@ -9,12 +9,13 @@
 \begin{document}
 
 \title
-{\Huge \textbf{POPL-2 Concurrency Project}\\ 
-\huge Code Documentation }
+{\Huge \textbf{Megathon-2018}\\ 
+\huge BoxRunner2D }
 % Author
-\author{\textsc{Saksham Mittal CS16BTECH110032} \\ 
-\textsc{Om Sitapara CS16BTECH11036} \\
-\textsc{Ram Nayak CS16BTECH11008} \\}
+\author{\textsc{Saksham Mittal} \\ 
+\textsc{Om Sitapara} \\
+\textsc{Harshit Patel} \\
+\textsc{Adithya Hosapate}\\}
 
 \maketitle
 \vspace{350px}
@@ -22,7 +23,7 @@
 \tableofcontents{}
 \vspace{400px}
 
-\section{Game Engine (ArrowsIoEngine)}
+\section{Game Engine}
 We have made our own game engine for creating window, rendering images / textures, translating the camera, managing input from user, calculating FPS (frames per second), error handling, etc. \newline
 
 Using GLEW for rendering graphics : \\
@@ -150,7 +151,7 @@ After this the camera position is set to the m\_mainPlayer, and update() functio
 
 updateNoPlayer() \\
 updateChars() \\
-updateBullets() \\
+
 updateHearts() \\
 
  \textbf{[NOTE: These are defined after this function. They are responsible for updating the info. of the player and the level.]} \\
@@ -170,9 +171,7 @@ While checking whether bullets are fired or not, we check whether the number ext
 After all the data is extracted, we set the data for m\_chars vector using setData() function. But we don’t do this for the m\_currentIndex (index of the main player) as the main player will have the most updated data with itself and only need the data for other players. \\
 \newline
 
-\subsubsection{MainGameServer::updateBullets() }
-This function serves two main roles : checking whether a bullet has collided with a player (and if yes, the health of the player is reduced) and checking whether a bullet has hit a wall (and if yes, that bullet is popped back). This is done for all players and hence the inner loop for checking the bullet collisions runs for each player.
-\newline
+
 
 \subsubsection{MainGameServer::updateHearts()}
 This function serves the purpose of updating the hearts visibility and increasing the player’s health incase it is low. For each heart, it checks whether the given main player is on the same position as the heart, and if it is so it increases the health and changes the visibility. After that we run a loop to check the visibility of all the hearts, and if it is false, we call updateTimer() function. \\
