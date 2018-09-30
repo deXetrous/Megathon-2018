@@ -224,7 +224,7 @@ void Character::moveUP(int vertical_speed)
 					m_first_time = true;
 					c1 = true;
 					m_direction = -1;
-					std::cout << "Collision with upper wall detected.\n";
+					//std::cout << "Collision with upper wall detected.\n";
 					//m_time_rem = 0;
 					//return; //without updating the position, as the player cannot move any closer than the min distance 
 				}
@@ -320,7 +320,7 @@ void Character::moveUP(int vertical_speed)
 				int distance = ((int)(fut_posy)) % TILE_WIDTH;
 				if (distance < MIN_WALL_DISTANCE) {
 					m_hasReachedGround = true;
-					std::cout << "Collision with lower wall detected.\n";
+					//std::cout << "Collision with lower wall detected.\n";
 					c1 = true;
 					fut_posy = m_position.y;
 					m_direction = 0;
@@ -496,7 +496,7 @@ void Character::moveUP(int vertical_speed)
 				// std::cout << " c2 taking y pos = " << fut_posy << std::endl;
 			}
 
-			std::cout << "Going to increment xpos = "<< m_position.x << ", ypos = " << m_position.y << std::endl;
+			//std::cout << "Going to increment xpos = "<< m_position.x << ", ypos = " << m_position.y << std::endl;
 			m_position = glm::vec2(fut_posx, fut_posy);
 			//m_position = glm::vec2(air_pos_x + x_pos, air_pos_y + y_pos);
 		}
@@ -652,7 +652,7 @@ void Character::moveRIGHT()
 		int distance = ((int)(m_position.x + m_dim.x)) % TILE_WIDTH;
 		if ((TILE_WIDTH - distance) < MIN_WALL_DISTANCE) {
 			life = false;
-			std::cout << "Setting false" << std::endl;
+			//std::cout << "Setting false" << std::endl;
 		}
 	}
 	if ((m_levelData[ceil((m_position.x + m_dim.x) / (float)TILE_WIDTH)][floor((m_position.y + m_dim.y) / (float)TILE_WIDTH)] == 's') ||
@@ -748,7 +748,7 @@ void Character::moveRIGHT()
 	}
 	else {
 		// std::cout << "going...else\n";
-		std::cout << "No wall below detected.\n";
+		//std::cout << "No wall below detected.\n";
 		m_hasReachedGround = false;
 		m_is_called_by = 1;
 		m_first_time = true;

@@ -106,7 +106,7 @@ void MainGame::gameLoop()
 
 		_inputManager.update();			//updating the input manager
 
-		std::cout << "Printing the life:" << m_mainPlayer->getLife() << std::endl;
+		//std::cout << "Printing the life:" << m_mainPlayer->getLife() << std::endl;
 
 		if (m_mainPlayer->getLife())
 			processInput();				//processing the input given by the player
