@@ -18,6 +18,7 @@ void processString(std::string & input, std::string & name2, int & indexOfClient
 		int indexOfClient = 0;
 		std::vector<Player> players;		//vector of player attributes
 		char name[100];
+		int levelChoicel;
 		std::cout << "Enter your username\n";
 		std::cin >> name;
 		std::string name2;
@@ -49,6 +50,8 @@ void processString(std::string & input, std::string & name2, int & indexOfClient
 			int clients;
 			std::cout << "Enter number of Clients" << std::endl;
 			std::cin >> clients;
+			std::cout << "Enter level" << std::endl;
+			std::cin >> levelChoicel;
 			socketServer server(SOCK_PORT, clients, Socket::ConnectionType::NonBlocking, 2048);		//creating the server
 			std::string tmp(name);
 			server.sendData(tmp);
@@ -57,7 +60,7 @@ void processString(std::string & input, std::string & name2, int & indexOfClient
 			std::string input = "";
 			server.receiveData(input);
 			processString(input, name2, indexOfClient, noOfPlayers, players);
-			MainGameServer mainGame(noOfPlayers, indexOfClient, players, &server);		//initalizing game
+			MainGameServer mainGame(noOfPlayers, indexOfClient, players, &server, levelChoicel);		//initalizing game
 			mainGame.run();
 			sockThread.join();
 		}
@@ -66,6 +69,8 @@ void processString(std::string & input, std::string & name2, int & indexOfClient
 			std::cout << "Enter server's IP address\n";
 			std::string ip;
 			std::cin >> ip;
+			std::cout << "Enter level" << std::endl;
+			std::cin >> levelChoicel;
 			socketClient client(ip, SOCK_PORT, 2048);		//creating the client and starting connection
 			char input[1000];
 			client.receiveBytes(input);
@@ -75,7 +80,7 @@ void processString(std::string & input, std::string & name2, int & indexOfClient
 			std::cout << input << std::endl;
 			std::string temp(input);
 			processString(temp, name2, indexOfClient, noOfPlayers, players);
-			MainGame mainGame(noOfPlayers, indexOfClient, players, &client);		//starting game
+			MainGame mainGame(noOfPlayers, indexOfClient, players, &client, levelChoicel);		//starting game
 			mainGame.run();
 		}
 

@@ -33,7 +33,7 @@ enum class GameState { PLAY, EXIT };
 class MainGame
 {
 public:
-	MainGame(int noOfPlayers, int currentIndex, const std::vector<Player>& players, socketClient* client);
+	MainGame(int noOfPlayers, int currentIndex, const std::vector<Player>& players, socketClient* client, int level);
 	~MainGame();
 
 	void run();

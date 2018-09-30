@@ -5,13 +5,13 @@
 #define PI 3.14159265
 
 //Initializing constructor with initial values
-MainGameServer::MainGameServer(int noOfPlayers, int currentIndex, const std::vector<Player>& players, socketServer* server) :
+MainGameServer::MainGameServer(int noOfPlayers, int currentIndex, const std::vector<Player>& players, socketServer* server, int level) :
 	_time(0.0f),
 	_screenWidth(1024),
 	_screenHeight(768),
 	_gameState(GameStateServer::PLAY),
 	_maxFPS(120.0f),
-	m_currentLevel(0),
+	m_currentLevel(level),
 	socket(server)
 {
 	_camera.init(_screenWidth, _screenHeight);
@@ -67,7 +67,7 @@ void MainGameServer::initSystems()
 
 	initialiseLevel(m_currentLevel);	//initializing level
 
-	m_leveldata = m_levels[m_currentLevel]->getLevelData();
+	m_leveldata = m_levels[0]->getLevelData();
 
 	_fpsLimiter.init(_maxFPS);		//capping the max fps
 
@@ -612,7 +612,7 @@ void MainGameServer::drawGame()
 
 	glUniformMatrix4fv(pLocation, 1, GL_FALSE, &(cameraMatrix[0][0]));
 
-	m_levels[m_currentLevel]->draw();
+	m_levels[0]->draw();
 
 	_spriteBatch.begin();
 	
