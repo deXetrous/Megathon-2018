@@ -495,56 +495,7 @@ void MainGameServer::processInput()
 		}
 
 
-		if (_inputManager.isKeyPressed(SDL_BUTTON_LEFT)) {
-			glm::vec2 mouseCoords = _inputManager.getMouseCoords();
-			mouseCoords = _camera.convertScreenToWorld(mouseCoords);
-
-			glm::vec2 direction = mouseCoords - m_mainPlayer->getPosition();
-			direction = glm::normalize(direction);
-
-			if (m_mainPlayer->getGunType() == 1)
-			{
-				std::string stringPath = "../Sparky-core/Textures/Arrows/";
-				int no;
-				if (direction.x >= 0 && direction.y >= 0) {
-					no = 90 - (int)(atan(direction.y / direction.x) * 180 / PI);
-				}
-				if (direction.x <= 0 && direction.y >= 0) {
-					no = 270 - (int)(atan(direction.y / direction.x) * 180 / PI);
-				}
-				if (direction.x >= 0 && direction.y <= 0) {
-					no = 90 - (int)(atan(direction.y / direction.x) * 180 / PI);
-				}
-				if (direction.x <= 0 && direction.y <= 0) {
-					no = 270 - (int)(atan(direction.y / direction.x) * 180 / PI);
-				}
-				stringPath += (std::to_string(no) + ".png");
-				ArrowsIoEngine::GLTexture texture = ArrowsIoEngine::ResourceManager::getTexture(stringPath);
-				_bullets.emplace_back(m_mainPlayer->getPosition(), direction, texture.id, 10.0f, 1000, m_currentIndex, 1);
-
-			}
-			else if (m_mainPlayer->getGunType() == 2)
-			{
-				std::string stringPath = "../Sparky-core/Textures/blade.png";
-				ArrowsIoEngine::GLTexture texture = ArrowsIoEngine::ResourceManager::getTexture(stringPath);
-				_bullets.emplace_back(m_mainPlayer->getPosition(), direction, texture.id, 4.0f, 300, m_currentIndex, 2);
-				_bullets.emplace_back(m_mainPlayer->getPosition(), -direction, texture.id, 4.0f, 300, m_currentIndex, 2);
-
-			}
-			else
-			{
-				std::string stringPath = "../Sparky-core/Textures/circle.png";
-				ArrowsIoEngine::GLTexture texture = ArrowsIoEngine::ResourceManager::getTexture(stringPath);
-				_bullets.emplace_back(m_mainPlayer->getPosition(), direction, texture.id, 2.0f, 100, m_currentIndex, 3);
-
-
-			}
-
-			newBulls += _bullets[_bullets.size() - 1].getData();
-			newBullCount++;
-
-
-		}
+		
 
 		if (_inputManager.isKeyDown(SDLK_SPACE)) {
 			m_mainPlayer->m_is_called_by = 0;
