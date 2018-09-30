@@ -178,10 +178,10 @@ void MainGame::processInput()
 	if (m_mainPlayer->timer_nitro > 0)
 	{
 		m_mainPlayer->timer_nitro--;
-		std::cout << "timer left" << m_mainPlayer->timer_nitro <<  std::endl;
+		//std::cout << "timer left" << m_mainPlayer->timer_nitro <<  std::endl;
 		if (m_mainPlayer->timer_nitro == 0)
 		{
-			std::cout << "Setting default " << std::endl;
+			//std::cout << "Setting default " << std::endl;
 			m_mainPlayer->setDefaultSpeed();
 		}
 	}
@@ -189,10 +189,10 @@ void MainGame::processInput()
 	if (m_mainPlayer->timer_slow > 0)
 	{
 		m_mainPlayer->timer_slow--;
-		std::cout << "timer left" << m_mainPlayer->timer_slow << std::endl;
+		//std::cout << "timer left" << m_mainPlayer->timer_slow << std::endl;
 		if (m_mainPlayer->timer_slow == 0)
 		{
-			std::cout << "Setting default " << std::endl;
+			//std::cout << "Setting default " << std::endl;
 			m_mainPlayer->setDefaultSpeedBlack();
 		}
 	}
@@ -574,7 +574,7 @@ void MainGame::updateLive()
 
 	if (!m_mainPlayer->getLife())
 	{
-		std::cout << "U came " << m_chars.size() - count << std::endl;
+		//std::cout << "U came " << m_chars.size() - count << std::endl;
 		//_gameState = GameState::EXIT;
 	}
 }
